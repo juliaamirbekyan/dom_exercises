@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .todo-container {
+            background-color: white;
+            box-shadow: 0 4px 8px black;
+            padding: 20px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            color: rgb(79, 79, 79);
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #c4c4c4;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: green;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        button:hover {
+            background-color: rgb(45, 215, 45);
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background-color: white;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        li.completed {
+            text-decoration: line-through;
+            color: #878787;
+        }
+
+        .delete {
+            background-color: red;
+            color: white;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            width: auto;
+        }
+
+        .delete:hover {
+            background-color: #c32333;
+        }
+
+        li:hover {
+            background-color:white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="todo-container">
+        <h1>To-Do List</h1>
+        <input type="text" id="taskInput" placeholder="Add a new task">
+        <button onclick="addTask()">Add Task</button>
+
+        <ul id="taskList"></ul>
+    </div>
+
+    <script>
+        function addTask() {
+            const input = document.getElementById("taskInput");
+            const taskText = input.value.trim();
+            
+            if (taskText !== "") {
+                const li = document.createElement("li");
+                li.textContent = taskText;
+                li.addEventListener("click", function () {
+                    li.classList.toggle("completed");
+                });
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+                deleteButton.classList.add("delete");
+                deleteButton.addEventListener("click", function () {
+                    li.remove();
+                });
+
+                li.appendChild(deleteButton);
+                document.getElementById("taskList").appendChild(li);
+                input.value = ""; 
+            }
+        }
+    </script>
+
+</body>
+</html>
